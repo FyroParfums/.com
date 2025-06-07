@@ -1,0 +1,242 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d3d3d3; /* Abu-abu */
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #000; /* Hitam */
+    color: white;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center; /* Center the nav items */
+    align-items: center;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: color 0.3s ease;
+    font-size: 1.1em;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: red; /* Warna merah saat di-klik atau hover */
+}
+
+.logo {
+    position: absolute;
+    right: 20px; /* Position logo to the right */
+}
+
+.logo img {
+    height: 50px; /* Adjust as needed */
+}
+
+/* Content Sections */
+.content-section {
+    display: none; /* Hidden by default */
+    padding: 40px 0;
+    min-height: calc(100vh - 70px); /* Adjust based on header height */
+}
+
+.content-section.active {
+    display: block; /* Show active section */
+}
+
+/* Beranda Section */
+#beranda h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+#beranda p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-info:nth-child(even) {
+    flex-direction: row-reverse; /* Alternate image and text */
+}
+
+.product-image {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-description {
+    flex: 2;
+    padding: 0 20px;
+}
+
+.product-description ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+/* E-Commerce Section */
+.e-commerce-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 50px;
+    min-height: calc(100vh - 70px); /* Ensure it takes full height */
+}
+
+.e-commerce-platform {
+    text-align: center;
+}
+
+.e-commerce-platform a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.e-commerce-platform a:hover {
+    background-color: #f0f0f0;
+}
+
+.e-commerce-platform img {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.e-commerce-platform p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Tentang Kami Section */
+.social-media-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    min-height: calc(100vh - 70px); /* Ensure it takes full height */
+}
+
+.social-media-item {
+    text-align: center;
+}
+
+.social-media-item a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.social-media-item a:hover {
+    background-color: #f0f0f0;
+}
+
+.social-media-item img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.social-media-item p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+}
+
+
+/* Responsive Design for Mobile (using media queries) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-item {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+
+    .logo {
+        position: static; /* Remove absolute positioning on mobile */
+        margin-top: 10px;
+    }
+
+    .product-info {
+        flex-direction: column; /* Stack image and text vertically on mobile */
+        text-align: center;
+    }
+
+    .product-info:nth-child(even) {
+        flex-direction: column; /* Keep consistent stacking */
+    }
+
+    .product-image,
+    .product-description {
+        padding: 10px 0;
+    }
+
+    .product-image img {
+        max-width: 80%; /* Adjust image size for mobile */
+    }
+
+    .e-commerce-container,
+    .social-media-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .e-commerce-platform img,
+    .social-media-item img {
+        width: 100px; /* Adjust logo size for mobile */
+    }
+}
