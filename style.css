@@ -21,6 +21,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Tambahkan sedikit shadow agar lebih jelas */
 }
 
 .navbar {
@@ -39,6 +40,7 @@ header {
     padding: 10px 20px;
     transition: color 0.3s ease;
     font-size: 1.1em;
+    font-weight: bold; /* Perjelas teks navigasi */
 }
 
 .nav-item:hover,
@@ -49,17 +51,20 @@ header {
 .logo {
     position: absolute;
     right: 20px; /* Position logo to the right */
+    display: flex; /* Mengatur agar logo bisa diatur posisinya */
+    align-items: center;
 }
 
 .logo img {
     height: 50px; /* Adjust as needed */
+    filter: invert(1); /* Jika logo Anda hitam, ini akan membuatnya putih agar terlihat di navbar hitam */
 }
 
 /* Content Sections */
 .content-section {
     display: none; /* Hidden by default */
     padding: 40px 0;
-    min-height: calc(100vh - 70px); /* Adjust based on header height */
+    /* min-height: calc(100vh - 70px); Untuk mobile, ini mungkin tidak ideal karena konten bisa sangat panjang */
 }
 
 .content-section.active {
@@ -71,16 +76,18 @@ header {
     text-align: center;
     margin-bottom: 30px;
     color: #000;
+    font-size: 2em; /* Sesuaikan ukuran judul */
 }
 
 #beranda p {
     line-height: 1.6;
     margin-bottom: 15px;
+    font-size: 0.95em; /* Sedikit perkecil ukuran teks paragraf */
 }
 
 .product-info {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Mengatur alignment ke atas agar gambar dan teks tidak terlalu jauh */
     margin-bottom: 40px;
     background-color: #fff;
     padding: 20px;
@@ -113,6 +120,7 @@ header {
     list-style: disc;
     margin-left: 20px;
     margin-bottom: 15px;
+    font-size: 0.9em; /* Perkecil ukuran teks list */
 }
 
 /* E-Commerce Section */
@@ -122,17 +130,22 @@ header {
     align-items: center;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
     gap: 50px;
-    min-height: calc(100vh - 70px); /* Ensure it takes full height */
+    min-height: calc(100vh - 70px); /* Ensure it takes full height if content is short */
+    padding: 40px 20px; /* Tambahkan padding agar ada ruang */
 }
 
 .e-commerce-platform {
     text-align: center;
+    width: 200px; /* Beri lebar tetap untuk item E-Commerce agar konsisten */
 }
 
 .e-commerce-platform a {
     text-decoration: none;
     color: #333;
-    display: block;
+    display: flex; /* Gunakan flexbox untuk menata gambar dan teks */
+    flex-direction: column; /* Tumpuk gambar dan teks */
+    align-items: center;
+    justify-content: center;
     padding: 20px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
@@ -161,17 +174,22 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 50px;
-    min-height: calc(100vh - 70px); /* Ensure it takes full height */
+    min-height: calc(100vh - 70px); /* Ensure it takes full height if content is short */
+    padding: 40px 20px; /* Tambahkan padding agar ada ruang */
 }
 
 .social-media-item {
     text-align: center;
+    width: 200px; /* Beri lebar tetap untuk item media sosial */
 }
 
 .social-media-item a {
     text-decoration: none;
     color: #333;
-    display: block;
+    display: flex; /* Gunakan flexbox untuk menata gambar dan teks */
+    flex-direction: column; /* Tumpuk gambar dan teks */
+    align-items: center;
+    justify-content: center;
     padding: 20px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
@@ -196,28 +214,49 @@ header {
 
 /* Responsive Design for Mobile (using media queries) */
 @media (max-width: 768px) {
+    /* Navbar HP */
     .navbar {
-        flex-direction: column;
-        padding: 10px;
+        flex-direction: row; /* Biarkan nav item tetap dalam baris */
+        justify-content: space-around; /* Sebarkan item secara merata */
+        padding: 10px 0;
+        font-size: 0.9em; /* Perkecil ukuran font navigasi */
     }
 
     .nav-item {
-        padding: 8px 15px;
-        font-size: 1em;
+        padding: 8px 10px; /* Kurangi padding */
+        font-size: 0.9em; /* Ukuran font lebih kecil untuk HP */
     }
 
     .logo {
-        position: static; /* Remove absolute positioning on mobile */
-        margin-top: 10px;
+        position: static; /* Biarkan logo tetap di posisi statis di navbar */
+        margin-left: auto; /* Posisikan logo ke kanan */
+        padding-right: 10px;
+    }
+
+    .logo img {
+        height: 40px; /* Perkecil ukuran logo di HP */
+    }
+
+    /* Beranda HP */
+    #beranda h1 {
+        font-size: 1.6em; /* Perkecil judul untuk HP */
+        margin-bottom: 20px;
+    }
+
+    #beranda p {
+        font-size: 0.85em; /* Perkecil teks paragraf untuk HP */
+        padding: 0 10px; /* Tambahkan padding horizontal */
     }
 
     .product-info {
-        flex-direction: column; /* Stack image and text vertically on mobile */
+        flex-direction: column; /* Tumpuk gambar dan teks vertikal */
         text-align: center;
+        padding: 15px;
+        margin-bottom: 30px;
     }
 
     .product-info:nth-child(even) {
-        flex-direction: column; /* Keep consistent stacking */
+        flex-direction: column; /* Tetap menumpuk */
     }
 
     .product-image,
@@ -226,17 +265,49 @@ header {
     }
 
     .product-image img {
-        max-width: 80%; /* Adjust image size for mobile */
+        max-width: 70%; /* Atur ukuran gambar agar tidak terlalu besar */
+        margin-bottom: 15px; /* Beri jarak antara gambar dan teks */
     }
 
-    .e-commerce-container,
+    .product-description ul {
+        font-size: 0.8em; /* Perkecil teks list untuk HP */
+    }
+
+    /* E-Commerce HP */
+    .e-commerce-container {
+        flex-direction: column; /* Tumpuk vertikal */
+        gap: 30px; /* Kurangi jarak antar item */
+        padding: 30px 20px;
+    }
+
+    .e-commerce-platform {
+        width: 180px; /* Sesuaikan lebar item E-Commerce */
+    }
+
+    .e-commerce-platform img {
+        width: 120px; /* Sesuaikan ukuran logo platform */
+    }
+
+    .e-commerce-platform p {
+        font-size: 1.1em; /* Sedikit perkecil font "Klik Disini" */
+    }
+
+    /* Tentang Kami HP */
     .social-media-container {
-        flex-direction: column;
-        gap: 30px;
+        flex-direction: column; /* Tumpuk vertikal */
+        gap: 30px; /* Kurangi jarak antar item */
+        padding: 30px 20px;
     }
 
-    .e-commerce-platform img,
+    .social-media-item {
+        width: 180px; /* Sesuaikan lebar item media sosial */
+    }
+
     .social-media-item img {
-        width: 100px; /* Adjust logo size for mobile */
+        width: 80px; /* Sesuaikan ukuran logo media sosial */
+    }
+
+    .social-media-item p {
+        font-size: 1.1em; /* Sedikit perkecil font nama akun */
     }
 }
