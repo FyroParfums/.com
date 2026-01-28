@@ -15,7 +15,7 @@ body {
 
 /* Header and Navigation */
 header {
-    background-color: #000; /* Hitam */
+    background-color: #2b9959; /* Hitam */
     color: white;
     padding: 10px 0;
     position: sticky;
@@ -45,7 +45,7 @@ header {
 
 .nav-item:hover,
 .nav-item.active {
-    color: red; /* Warna merah saat di-klik atau hover */
+    color: rgb(0, 0, 0); /* Warna merah saat di-klik atau hover */
 }
 
 .logo {
@@ -83,6 +83,13 @@ header {
     line-height: 1.6;
     margin-bottom: 15px;
     font-size: 0.95em; /* Sedikit perkecil ukuran teks paragraf */
+}
+
+.Judul1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+    font-size: 2em; /* Sesuaikan ukuran judul */
 }
 
 .product-info {
