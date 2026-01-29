@@ -1,320 +1,127 @@
-/* General Styles */
+:root {
+    --maroon: #4caf50;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #d3d3d3; /* Abu-abu */
-    color: #333;
+    /* Latar belakang yang kamu minta */
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(96, 202, 123, 0.5)), 
+                    url('http://baliunforgetablemoments.weebly.com/uploads/5/7/4/2/57423803/pantai-ora_orig.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+.main-wrapper {
+    max-width: 1240px;
+    margin: 20px auto;
+    background: rgba(240, 240, 240, 0.95);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.7);
 }
 
-/* Header and Navigation */
-header {
-    background-color: #2b9959; /* Hitam */
-    color: white;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Tambahkan sedikit shadow agar lebih jelas */
+.bar-bg {
+    background: #e0e0e0;
+    height: 10px;
+    border-radius: 5px;
+    margin-top: 4px;
 }
 
-.navbar {
-    display: flex;
-    justify-content: center; /* Center the nav items */
-    align-items: center;
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.nav-item {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    transition: color 0.3s ease;
-    font-size: 1.1em;
-    font-weight: bold; /* Perjelas teks navigasi */
-}
-
-.nav-item:hover,
-.nav-item.active {
-    color: rgb(0, 0, 0); /* Warna merah saat di-klik atau hover */
-}
-
-.logo {
-    position: absolute;
-    right: 20px; /* Position logo to the right */
-    display: flex; /* Mengatur agar logo bisa diatur posisinya */
-    align-items: center;
-}
-
-.logo img {
-    height: 50px; /* Adjust as needed */
-    filter: invert(1); /* Jika logo Anda hitam, ini akan membuatnya putih agar terlihat di navbar hitam */
-}
-
-/* Content Sections */
-.content-section {
-    display: none; /* Hidden by default */
-    padding: 40px 0;
-    /* min-height: calc(100vh - 70px); Untuk mobile, ini mungkin tidak ideal karena konten bisa sangat panjang */
-}
-
-.content-section.active {
-    display: block; /* Show active section */
-}
-
-/* Beranda Section */
-#beranda h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #000;
-    font-size: 2em; /* Sesuaikan ukuran judul */
-}
-
-#beranda p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 0.95em; /* Sedikit perkecil ukuran teks paragraf */
-}
-
-.Judul1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #000;
-    font-size: 2em; /* Sesuaikan ukuran judul */
-}
-
-.product-info {
-    display: flex;
-    align-items: flex-start; /* Mengatur alignment ke atas agar gambar dan teks tidak terlalu jauh */
-    margin-bottom: 40px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.product-info:nth-child(even) {
-    flex-direction: row-reverse; /* Alternate image and text */
-}
-
-.product-image {
-    flex: 1;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.product-image img {
-    max-width: 100%;
-    height: auto;
+.bar-fill {
+    height: 100%;
+    background: var(--maroon);
     border-radius: 5px;
 }
 
-.product-description {
-    flex: 2;
-    padding: 0 20px;
-}
-
-.product-description ul {
-    list-style: disc;
-    margin-left: 20px;
-    margin-bottom: 15px;
-    font-size: 0.9em; /* Perkecil ukuran teks list */
-}
-
-/* E-Commerce Section */
-.e-commerce-container {
+.note-circle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #ddd;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 50px;
-    min-height: calc(100vh - 70px); /* Ensure it takes full height if content is short */
-    padding: 40px 20px; /* Tambahkan padding agar ada ruang */
-}
-
-.e-commerce-platform {
-    text-align: center;
-    width: 200px; /* Beri lebar tetap untuk item E-Commerce agar konsisten */
-}
-
-.e-commerce-platform a {
-    text-decoration: none;
-    color: #333;
-    display: flex; /* Gunakan flexbox untuk menata gambar dan teks */
-    flex-direction: column; /* Tumpuk gambar dan teks */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.e-commerce-platform a:hover {
-    background-color: #f0f0f0;
-}
-
-.e-commerce-platform img {
-    width: 150px; /* Adjust size as needed */
-    height: auto;
-    margin-bottom: 15px;
-}
-
-.e-commerce-platform p {
-    font-size: 1.2em;
+    font-size: 9px;
     font-weight: bold;
-    color: #000;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Tentang Kami Section */
-.social-media-container {
+.note-circle i {
+    color: #2d5a27;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+/* Menghilangkan scrollbar pada menu kategori tapi tetap bisa di-scroll di HP */
+nav div::-webkit-scrollbar {
+    display: none;
+}
+nav div {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Efek Sticky Header */
+header {
+    transition: all 0.3s ease;
+}
+
+/* Memastikan konten di bawah tidak tertutup navbar saat discroll */
+.main-wrapper {
+    margin-top: 0; 
+}
+
+/* Hover effect untuk list menu */
+nav ul li {
+    border-right: 1px solid #f0f0f0;
+}
+nav ul li:first-child {
+    border-left: 1px solid #f0f0f0;
+}
+
+/* Section Title ala Fragrantica */
+.section-title {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #333;
+    border-bottom: 2px solid #800000;
+    display: inline-block;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Card Parfum Baru */
+.perfume-card-mini {
+    background: white;
+    border: 1px solid #eee;
+    padding: 10px;
+    text-align: center;
+    transition: all 0.3s;
+}
+.perfume-card-mini:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #800000;
+}
+.perfume-card-mini img {
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto 10px;
+}
+
+/* List Best Seller */
+.best-item {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 50px;
-    min-height: calc(100vh - 70px); /* Ensure it takes full height if content is short */
-    padding: 40px 20px; /* Tambahkan padding agar ada ruang */
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    gap: 10px;
 }
-
-.social-media-item {
-    text-align: center;
-    width: 200px; /* Beri lebar tetap untuk item media sosial */
-}
-
-.social-media-item a {
-    text-decoration: none;
-    color: #333;
-    display: flex; /* Gunakan flexbox untuk menata gambar dan teks */
-    flex-direction: column; /* Tumpuk gambar dan teks */
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.social-media-item a:hover {
-    background-color: #f0f0f0;
-}
-
-.social-media-item img {
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-    margin-bottom: 15px;
-}
-
-.social-media-item p {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #000;
-}
-
-
-/* Responsive Design for Mobile (using media queries) */
-@media (max-width: 768px) {
-    /* Navbar HP */
-    .navbar {
-        flex-direction: row; /* Biarkan nav item tetap dalam baris */
-        justify-content: space-around; /* Sebarkan item secara merata */
-        padding: 10px 0;
-        font-size: 0.9em; /* Perkecil ukuran font navigasi */
-    }
-
-    .nav-item {
-        padding: 8px 10px; /* Kurangi padding */
-        font-size: 0.9em; /* Ukuran font lebih kecil untuk HP */
-    }
-
-    .logo {
-        position: static; /* Biarkan logo tetap di posisi statis di navbar */
-        margin-left: auto; /* Posisikan logo ke kanan */
-        padding-right: 10px;
-    }
-
-    .logo img {
-        height: 40px; /* Perkecil ukuran logo di HP */
-    }
-
-    /* Beranda HP */
-    #beranda h1 {
-        font-size: 1.6em; /* Perkecil judul untuk HP */
-        margin-bottom: 20px;
-    }
-
-    #beranda p {
-        font-size: 0.85em; /* Perkecil teks paragraf untuk HP */
-        padding: 0 10px; /* Tambahkan padding horizontal */
-    }
-
-    .product-info {
-        flex-direction: column; /* Tumpuk gambar dan teks vertikal */
-        text-align: center;
-        padding: 15px;
-        margin-bottom: 30px;
-    }
-
-    .product-info:nth-child(even) {
-        flex-direction: column; /* Tetap menumpuk */
-    }
-
-    .product-image,
-    .product-description {
-        padding: 10px 0;
-    }
-
-    .product-image img {
-        max-width: 70%; /* Atur ukuran gambar agar tidak terlalu besar */
-        margin-bottom: 15px; /* Beri jarak antara gambar dan teks */
-    }
-
-    .product-description ul {
-        font-size: 0.8em; /* Perkecil teks list untuk HP */
-    }
-
-    /* E-Commerce HP */
-    .e-commerce-container {
-        flex-direction: column; /* Tumpuk vertikal */
-        gap: 30px; /* Kurangi jarak antar item */
-        padding: 30px 20px;
-    }
-
-    .e-commerce-platform {
-        width: 180px; /* Sesuaikan lebar item E-Commerce */
-    }
-
-    .e-commerce-platform img {
-        width: 120px; /* Sesuaikan ukuran logo platform */
-    }
-
-    .e-commerce-platform p {
-        font-size: 1.1em; /* Sedikit perkecil font "Klik Disini" */
-    }
-
-    /* Tentang Kami HP */
-    .social-media-container {
-        flex-direction: column; /* Tumpuk vertikal */
-        gap: 30px; /* Kurangi jarak antar item */
-        padding: 30px 20px;
-    }
-
-    .social-media-item {
-        width: 180px; /* Sesuaikan lebar item media sosial */
-    }
-
-    .social-media-item img {
-        width: 80px; /* Sesuaikan ukuran logo media sosial */
-    }
-
-    .social-media-item p {
-        font-size: 1.1em; /* Sedikit perkecil font nama akun */
-    }
+.best-item:last-child { border: none; }
+.rank-num {
+    font-size: 20px;
+    font-weight: 900;
+    color: #ddd;
+    width: 25px;
 }
