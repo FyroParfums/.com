@@ -1,4 +1,3 @@
-
 // Fungsi Utama Menampilkan Data ke Layar
 function displayPerfume(perfume) {
     // Nama & Gambar
@@ -58,10 +57,10 @@ window.onload = () => displayPerfume(allPerfumes[0]);
 // Data Tambahan untuk Home
 const homeData = {
     newArrivals: [
-        { name: "Floral", brand: "ANGELE", img: "angele 1.png" },
-        { name: "Fruity", brand: "ENCHANTRESS", img: "enchantress 1.png" },
-        { name: "Sweey", brand: "THE QUEEN", img: "the queen 1.png" },
-        { name: "Musky", brand: "WHITE GODDESS", img: "white goddess 1.png" }
+        { name: "Floral", brand: "ANGELE", img: "AG1.png" },
+        { name: "Fruity", brand: "ENCHANTRESS", img: "EN1.png" },
+        { name: "Sweet", brand: "THE QUEEN", img: "TQ1.png" },
+        { name: "Musky", brand: "WHITE GODDESS", img: "WG1.png" }
     ],
     bestSellers: [
         { name: "Angele", brand: "Floral" },
@@ -100,4 +99,3 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHomeContent();
     // Panggil fungsi search/history yang lama juga di sini
 });
-
