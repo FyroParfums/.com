@@ -1,47 +1,4 @@
 
-const allPerfumes = [
-    {
-        id: "The Queen-1",
-        brand: "FYRO",
-        name: "THE QUEEN",
-        img: "fyro pantai 1.jpg",
-        top: ["Grapefruit", "Cinnamon"],
-        mid: ["Lavender"],
-        base: ["Sandalwood", "Licorice"],
-        accords: { woody: "90%", spicy: "70%", citrus: "40%" }
-    },
-    {
-        id: "chanel-5",
-        brand: "Chanel",
-        name: "No 5 Parfum",
-        img: "https://fimgs.net/images/perfume/m.608.jpg",
-        top: ["Aldehydes", "Ylang-Ylang"],
-        mid: ["Iris", "Jasmine"],
-        base: ["Sandalwood", "Vanilla"],
-        accords: { floral: "100%", powdery: "80%", woody: "50%" }
-    },
-    {
-        id: "aventus-1",
-        brand: "Creed",
-        name: "Aventus",
-        img: "https://fimgs.net/images/perfume/m.9828.jpg",
-        top: ["Pineapple", "Bergamot"],
-        mid: ["Birch", "Patchouli"],
-        base: ["Musk", "Oakmoss"],
-        accords: { fruity: "95%", smoky: "80%", woody: "60%" }
-    },
-    {
-        id: "baccarat-540",
-        brand: "Maison Francis Kurkdjian",
-        name: "Baccarat Rouge 540",
-        img: "https://fimgs.net/images/perfume/m.33514.jpg",
-        top: ["Saffron", "Jasmine"],
-        mid: ["Amberwood", "Ambergris"],
-        base: ["Fir Resin", "Cedar"],
-        accords: { woody: "85%", amber: "90%", spicy: "30%" }
-    }
-];
-
 // Fungsi Utama Menampilkan Data ke Layar
 function displayPerfume(perfume) {
     // Nama & Gambar
@@ -143,3 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHomeContent();
     // Panggil fungsi search/history yang lama juga di sini
 });
+
