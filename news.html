@@ -35,17 +35,20 @@
         </h1>
 
         <div class="flex-1 max-w-2xl w-full mx-0 md:mx-10">
-            <div class="relative flex shadow-inner">
-                <input type="text" id="mainSearch" 
+            <form action="javascript:void(0);" onsubmit="performSearch()" class="relative flex shadow-inner">
+                <input type="search" id="mainSearch" 
                     oninput="showSuggestions()" 
-                    onkeyup="if(event.key === 'Enter') performSearch()"
-                    placeholder="Search Fragrance, Perfumes, News, Others..." 
-                    class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm">
+                    placeholder="Search Fragrance, Perfumes, News, others..." 
+                    inputmode="search"
+                    autocomplete="off"
+                    class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm appearance-none">
+                
                 <div id="searchSuggestions" class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-md z-[200] hidden border border-t-0 border-gray-200"></div>
-                <button onclick="performSearch()" class="bg-red-900 text-white px-6 rounded-r-md">
+                
+                <button type="submit" class="bg-red-900 text-white px-6 rounded-r-md active:bg-red-700">
                     <i class="fa fa-search"></i>
                 </button>
-            </div>
+            </form>
         </div>
 
         <div class="hidden lg:flex gap-3 text-gray-400">
