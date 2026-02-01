@@ -34,10 +34,12 @@
         <div class="flex-1 max-w-2xl w-full mx-0 md:mx-10">
             <div class="relative flex shadow-inner">
                 <input type="text" id="mainSearch" 
-                    placeholder="Search Fragrance, Perfume, Others..." 
+                    oninput="showSuggestions()" 
+                    onkeyup="if(event.key === 'Enter') performSearch()"
+                    placeholder="Search Fragrance, Perfumes, News, Others..." 
                     class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm">
-                <button onclick="performSearch()" 
-                        class="bg-red-900 text-white px-6 rounded-r-md hover:bg-black transition-colors">
+                <div id="searchSuggestions" class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-md z-[200] hidden border border-t-0 border-gray-200"></div>
+                <button onclick="performSearch()" class="bg-red-900 text-white px-6 rounded-r-md">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -76,7 +78,7 @@
             <div class="bg-white p-6 border rounded-xl shadow-sm">
                 <h3 class="text-sm font-black text-red-900 uppercase tracking-widest mb-4 border-b pb-2">Hubungi Kami</h3>
                 <div class="space-y-4">
-                    <a href="https://wa.me/628123456789" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-green-600 transition">
+                    <a href="https://wa.me/6282111491281" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-green-600 transition">
                         <i class="fab fa-whatsapp text-xl"></i>
                         <span class="text-sm font-bold">+62 821-1149-1281 (WhatsApp)</span>
                     </a>
@@ -114,7 +116,7 @@
     </section>
 
     <footer class="bg-gray-100 border-t mt-10 py-10 px-10 text-center text-gray-400 text-xs">
-        <p class="font-bold text-gray-600">FYRO.PARFUMS ®, Depok, Indonesia.</p>
+        <p class="font-bold text-gray-600">©FYRO.PARFUMS, Depok, Indonesia.</p>
         <p class="mt-2">Hubungi Kami.</p>
         <p>Instagram @fyroparfume.id</p>
     </footer>
