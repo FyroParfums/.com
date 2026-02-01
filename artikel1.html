@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="shortcut icon" href="Logo Head.jpeg" type="image/x-icon">
+    <style>
+        /* Rata Kanan Kiri untuk paragraf */
+        .article-content p {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 1rem;
+        }
+        /* Posisi Artikel di tengah layar */
+        .max-width-center {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,8 +34,8 @@
         <div class="flex gap-4 uppercase">
             <a href="Tentang Kami.html" class="hover:text-red-900">tentang kami</a>
             <a href="#" class="hover:text-red-900">keranjang</a>
-            <a href="#" class="hover:text-red-900">Komunitas</a>
-            <a href="https://x.com/FyroParfums" class="hover:text-red-900 text-red-800"></a>
+            <a href="https://x.com/FyroParfums" class="hover:text-red-900">Komunitas</a>
+            <a href="#" class="hover:text-red-900 text-red-800"></a>
         </div>
     </div>
 
@@ -34,10 +48,12 @@
         <div class="flex-1 max-w-2xl w-full mx-0 md:mx-10">
             <div class="relative flex shadow-inner">
                 <input type="text" id="mainSearch" 
-                    placeholder="Search Fragrance, Perfume, Others..." 
+                    oninput="showSuggestions()" 
+                    onkeyup="if(event.key === 'Enter') performSearch()"
+                    placeholder="Search Fragrance, Perfumes, News, Others..." 
                     class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm">
-                <button onclick="performSearch()" 
-                        class="bg-red-900 text-white px-6 rounded-r-md hover:bg-black transition-colors">
+                <div id="searchSuggestions" class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-md z-[200] hidden border border-t-0 border-gray-200"></div>
+                <button onclick="performSearch()" class="bg-red-900 text-white px-6 rounded-r-md">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -54,7 +70,7 @@
     <div class="max-w-6xl mx-auto overflow-x-auto">
         <ul class="flex justify-center whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wider text-gray-700">
             <li><a href="beranda.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Beranda</a></li>
-            <li><a href="news.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">News</a></li>
+            <li><a href="#" class="block px-4 py-3 bg-red-900 text-white transition">News</a></li>
             <li><a href="index.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Perfume</a></li>
         </ul>
     </div>
@@ -64,65 +80,66 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 p-6 md:p-10">
         
         <article class="lg:col-span-8">
-            <a href="news.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-red-900 font-bold text-[10px] uppercase tracking-widest mb-6 transition-colors">
-                <i class="fa fa-arrow-left"></i> Kembali ke News
-            </a>
+            <div class="max-width-center">
+                <a href="news.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-red-900 font-bold text-[10px] uppercase tracking-widest mb-6 transition-colors">
+                    <i class="fa fa-arrow-left"></i> Kembali ke News
+                </a>
 
-            <header class="mb-8">
-                <span class="text-red-900 font-sans font-bold text-xs uppercase tracking-widest">Tips</span>
-                <h1 class="text-4xl md:text-5xl font-bold mt-2 leading-tight">Cara Mencari Aroma Parfum dengan Kualitas yang Terbaik untuk Perempuan.</h1>
-                <div class="flex items-center gap-4 mt-6 text-sm font-sans text-gray-500">
-                    <img src="Penulis.jpeg" class="w-10 h-10 rounded-full border">
-                    <div>
-                        <p class="font-bold text-gray-800 italic">Penulis</p>
-                        <p class="text-gray-800 italic">Oleh Faisal S.</p>
-
-                        <p class="font-bold text-gray-800 italic">Editor</p>
-                        <p class="text-gray-800 italic">Oleh Putra S.</p>
-                        <p>Diterbitkan pada 29 Januari 2026</p>
+                <header class="mb-8">
+                    <span class="text-red-900 font-sans font-bold text-xs uppercase tracking-widest">Tips</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 leading-tight text-gray-900">Cara Mencari Aroma Parfum dengan Kualitas yang Terbaik untuk Perempuan.</h1>
+                    <div class="flex items-center gap-4 mt-6 text-sm font-sans text-gray-500">
+                        <img src="Penulis.jpeg" class="w-10 h-10 rounded-full border">
+                        <div>
+                            <p class="italic text-gray-800"><span class="font-bold">Penulis:</span> Oleh Faisal S.</p>
+                            <p class="italic text-gray-800"><span class="font-bold">Editor:</span> Oleh Putra S.</p>
+                            <p>Diterbitkan pada 29 Januari 2026</p>
+                        </div>
                     </div>
+                </header>
+
+                <div class="mb-10 text-center">
+                    <img src="https://image.idntimes.com/post/20211214/pexels-photo-965989-0398d0c0a9ce4005143c2d8c8496cd6a-ae295cb9e985c700db6b22b2628c591a.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75" alt="Perfume Bottle" class="w-full h-auto md:h-[500px] object-cover rounded-sm shadow-lg mx-auto">
+                    <p class="text-xs text-gray-400 mt-2 italic font-sans">Source: IDN Times</p>
                 </div>
-            </header>
 
-            <div class="mb-10">
-                <img src="https://image.idntimes.com/post/20211214/pexels-photo-965989-0398d0c0a9ce4005143c2d8c8496cd6a-ae295cb9e985c700db6b22b2628c591a.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75" alt="Perfume Bottle" class="w-full h-[500px] object-cover rounded-sm shadow-lg">
-                <p class="text-xs text-center text-gray-400 mt-2 italic font-sans">Source: IDN Times</p>
-            </div>
+                <div class="article-content">
+                    <p class="font-bold">Dunia parfum terus berubah-ubah dan dari segi pemilihan tidak asal pilih aroma dan bentuk parfum, berikut tips penyaringan untuk parfum:</p>
+                    <p>Memilih parfum bukan sekadar pilih wangi yang enak saja untuk perempuan, parfum harus mencerminkan kepribadian, gaya hidup, fungsi penggunaan, bahkan bentuk kemasan yang sesuai agar wangi terasa maksimal dan nyaman dipakai.</p>
+                    
+                    <div class="mb-10 text-center">
+                        <img src="https://mmc.tirto.id/image/otf/1240x0,q70/2024/05/03/ilustrasi-parfum-istockphoto_ratio-16x9.jpg" alt="Perfume Bottle" class="w-full h-auto md:h-[500px] object-cover rounded-sm shadow-lg mx-auto">
+                        <p class="text-xs text-gray-400 mt-2 italic font-sans">Source: tirto.id</p>
+                    </div>
 
-            <div class="article-content">
-                <p class="font-bold">Dunia parfum terus berubah-ubah dan dari segi pemilihan tidak asal pilih aroma dan bentuk parfum, berikut tips penyaringan untuk parfum:</p>
-                
-                <p>Memilih parfum bukan sekadar pilih wangi yang enak saja untuk perempuan, parfum harus mencerminkan kepribadian, gaya hidup, fungsi penggunaan, bahkan bentuk kemasan yang sesuai agar wangi terasa maksimal dan nyaman dipakai.</p>
-                
-            <div class="mb-10">
-                <img src="https://mmc.tirto.id/image/otf/1240x0,q70/2024/05/03/ilustrasi-parfum-istockphoto_ratio-16x9.jpg" alt="Perfume Bottle" class="w-full h-[500px] object-cover rounded-sm shadow-lg">
-                <p class="text-xs text-center text-gray-400 mt-2 italic font-sans">Source: tirto.id</p>
-            </div>
+                    <p class="font-bold">Mengenal Struktur Aroma Parfum:</p>
+                    <p>Top Notes – aroma pertama yang tercium setelah disemprotkan; biasanya ringan, segar, dan cepat menguap.</p>
+                    <p>Middle Notes (Heart Notes) – aroma inti yang mulai muncul setelah top notes memudar; memberikan karakter utama parfum.</p>
+                    <p>Base Notes – bagian terdalam yang bertahan paling lama dan sering mencerminkan kepribadian pemakai parfum.</p>
 
-                <p class="font-bold">Mengenal Struktur Aroma Parfum:</p>
-                <p>Top Notes – aroma pertama yang tercium setelah disemprotkan; biasanya ringan, segar, dan cepat menguap.</p>
-                <p>Middle Notes (Heart Notes) – aroma inti yang mulai muncul setelah top notes memudar; memberikan karakter utama parfum.</p>
-                <p>Base Notes – bagian terdalam yang bertahan paling lama dan sering mencerminkan kepribadian pemakai parfum.</p>
+                    <p class="font-bold">Menyesuaikan Aroma dengan Personalitas & Gaya Hidup:</p>
+                    <p>Gaya hidup aktif dan ceria – Pilih aroma yang fresh dan enerjik seperti citrus, green, atau aroma buah. Aroma ini memberi kesan semangat dan cocok dipakai siang hari atau ketika banyak bergerak.</p>
+                    <p>Elegan, profesional, dan dewasa – Aroma dengan sentuhan woody, amber, atau spicy memberi kesan percaya diri dan cocok digunakan saat meeting atau acara formal.</p>
+                    <p>Tenang & lembut – Aroma seperti soft musk, powdery, atau aquatic memberi kesan bersih, nyaman, dan tidak terlalu mencolok.</p>
 
-                <p class="font-bold">Menyesuaikan Aroma dengan Personalitas & Gaya Hidup:</p>
-                <p>Gaya hidup aktif dan ceria – Pilih aroma yang fresh dan enerjik seperti citrus, green, atau aroma buah. Aroma ini memberi kesan semangat dan cocok dipakai siang hari atau ketika banyak bergerak.</p>
-                <p>Elegan, profesional, dan dewasa – Aroma dengan sentuhan woody, amber, atau spicy memberi kesan percaya diri dan cocok digunakan saat meeting atau acara formal.</p>
-                <p>Tenang & lembut – Aroma seperti soft musk, powdery, atau aquatic memberi kesan bersih, nyaman, dan tidak terlalu mencolok.</p>
+                    <p class="font-bold">Peran Bentuk Botol & Kemasan dalam Memilih Parfum:</p>
+                    <p>Botol yang ergonomis dan cantik sering menarik perhatian karena memberi kesan estetika dan personal. Meski bentuk botol tidak memengaruhi aroma itu sendiri, kemasan yang nyaman membuat perempuan lebih senang memakai parfum secara rutin.</p>
+                    <p>Banyak konsumen tertarik pada desain yang “representatif” baik feminin, minimalis, maupun elegan karena itu juga merupakan bagian dari identitas diri saat memilih parfum.</p>
+                </div>
 
-                <p class="font-bold">Peran Bentuk Botol & Kemasan dalam Memilih Parfum:</p>
-                <p>Botol yang ergonomis dan cantik sering menarik perhatian karena memberi kesan estetika dan personal. Meski bentuk botol tidak memengaruhi aroma itu sendiri, kemasan yang nyaman membuat perempuan lebih senang memakai parfum secara rutin.</p>
-                <p>Banyak konsumen tertarik pada desain yang “representatif” baik feminin, minimalis, maupun elegan karena itu juga merupakan bagian dari identitas diri saat memilih parfum.</p>
-            </div>
+                <div class="mt-12 p-6 md:p-8 bg-gray-50 border-l-4 border-red-900 rounded-sm shadow-sm article-content">
+                    <p class="font-bold text-lg text-gray-800">Kesimpulan:</p>
+                    <p class="text-gray-700 leading-relaxed italic">
+                        Memilih parfum untuk perempuan tidak bisa dilakukan secara sembarangan karena parfum merupakan bagian dari identitas diri. Dari segi aroma, pemahaman terhadap struktur parfum—mulai dari top notes, middle notes, hingga base notes—menjadi kunci agar wangi yang dipilih tidak hanya menarik di awal, tetapi juga nyaman dan tahan lama saat digunakan. Selain itu, aroma parfum sebaiknya disesuaikan dengan kepribadian, gaya hidup, dan aktivitas, sehingga wangi yang dipakai terasa relevan dan meningkatkan rasa percaya diri. Di sisi lain, bentuk dan desain botol parfum juga memiliki peran penting. Walaupun tidak memengaruhi aroma secara langsung, kemasan yang ergonomis, estetis, dan merepresentasikan karakter pengguna dapat meningkatkan pengalaman penggunaan parfum secara keseluruhan. Botol parfum sering kali menjadi faktor emosional yang membuat seseorang lebih terikat dan konsisten menggunakan parfum tersebut. Dengan mempertimbangkan keselarasan antara aroma dan bentuk, perempuan dapat memilih parfum yang tidak hanya harum, tetapi juga sesuai dengan kebutuhan, karakter, dan gaya personal. Pada akhirnya, parfum terbaik adalah yang mampu membuat penggunanya merasa nyaman, percaya diri, dan autentik dalam setiap kesempatan.
+                    </p>
+                </div>
 
-            <div class="mt-12 pt-6 border-t font-sans">
-                <p class="font-bold">Kesimpulan:</p>
-                <p>Memilih parfum untuk perempuan tidak bisa dilakukan secara sembarangan karena parfum merupakan bagian dari identitas diri. Dari segi aroma, pemahaman terhadap struktur parfum—mulai dari top notes, middle notes, hingga base notes—menjadi kunci agar wangi yang dipilih tidak hanya menarik di awal, tetapi juga nyaman dan tahan lama saat digunakan. Selain itu, aroma parfum sebaiknya disesuaikan dengan kepribadian, gaya hidup, dan aktivitas, sehingga wangi yang dipakai terasa relevan dan meningkatkan rasa percaya diri.
-                Di sisi lain, bentuk dan desain botol parfum juga memiliki peran penting. Walaupun tidak memengaruhi aroma secara langsung, kemasan yang ergonomis, estetis, dan merepresentasikan karakter pengguna dapat meningkatkan pengalaman penggunaan parfum secara keseluruhan. Botol parfum sering kali menjadi faktor emosional yang membuat seseorang lebih terikat dan konsisten menggunakan parfum tersebut.
-                Dengan mempertimbangkan keselarasan antara aroma dan bentuk, perempuan dapat memilih parfum yang tidak hanya harum, tetapi juga sesuai dengan kebutuhan, karakter, dan gaya personal. Pada akhirnya, parfum terbaik adalah yang mampu membuat penggunanya merasa nyaman, percaya diri, dan autentik dalam setiap kesempatan.</p>
-                <span class="text-xs font-bold text-gray-400 uppercase mr-4">Tags:</span>
-                <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Oud</a>
-                <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Spring 2026</a>
-                <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Trends</a>
+                <div class="mt-8 flex flex-wrap gap-2">
+                    <span class="text-xs font-bold text-gray-400 uppercase self-center mr-2">Tags:</span>
+                    <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Oud</a>
+                    <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Spring 2026</a>
+                    <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Trends</a>
+                </div>
             </div>
         </article>
 
@@ -130,14 +147,14 @@
             <h2 class="section-title">Artikel Terkait</h2>
             <div class="space-y-6">
                 <div class="flex gap-4 group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200" class="w-20 h-20 object-cover rounded shadow-sm group-hover:opacity-80">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200" class="w-20 h-20 object-cover rounded shadow-sm">
                     <div>
                         <h4 class="text-sm font-bold leading-tight group-hover:text-red-900">10 Parfum Floral Terbaik untuk Wanita</h4>
                         <p class="text-[10px] text-gray-400 mt-1 uppercase">Best Seller</p>
                     </div>
                 </div>
                 <div class="flex gap-4 group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=200" class="w-20 h-20 object-cover rounded shadow-sm group-hover:opacity-80">
+                    <img src="https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=200" class="w-20 h-20 object-cover rounded shadow-sm">
                     <div>
                         <h4 class="text-sm font-bold leading-tight group-hover:text-red-900">Mengenal Notes Patchouli: Dari Tanah ke Botol</h4>
                         <p class="text-[10px] text-gray-400 mt-1 uppercase">Ingredients</p>
@@ -145,25 +162,23 @@
                 </div>
             </div>
 
-<div class="mt-10 bg-gray-100 p-6 text-center rounded border-2 border-dashed border-gray-300">
-    <p class="text-xs text-gray-400 uppercase mb-4 tracking-widest">Advertisement</p>
-    
-    <a href="https://www.anugerahprint.com/" target="_blank" class="block group relative overflow-hidden rounded shadow-md">
-        <img src="AP.jpeg" 
-            alt="Promo Fyro Parfums" 
-            class="w-full h-auto transition-transform duration-500 group-hover:scale-110">
-        
-        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
-            <span class="bg-white text-black text-[10px] font-bold px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">
-                Kunjungi Sekarang
-            </span>
-        </div>
-    </a>
-    
-    <p class="mt-3 text-[10px] text-gray-400 italic font-sans"></p>
-</div>
+            <div class="mt-10 bg-gray-100 p-6 text-center rounded border-2 border-dashed border-gray-300">
+                <p class="text-xs text-gray-400 uppercase mb-4 tracking-widest">Advertisement</p>
+                <a href="https://www.anugerahprint.com/" target="_blank" class="block group relative overflow-hidden rounded shadow-md">
+                    <img src="AP.jpeg" class="w-full h-auto transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                        <span class="bg-white text-black text-[10px] font-bold px-4 py-2 uppercase tracking-tighter">Kunjungi Sekarang</span>
+                    </div>
+                </a>
+            </div>
         </aside>
     </div>
+
+    <footer class="bg-gray-100 border-t mt-10 py-10 px-10 text-center text-gray-400 text-xs">
+        <p class="font-bold text-gray-600">FYRO.PARFUMS ®, Depok, Indonesia.</p>
+        <p class="mt-2">Hubungi Kami.</p>
+        <p>Instagram @fyroparfume.id</p>
+    </footer>
 </div>
 
 <script src="script.js"></script>
