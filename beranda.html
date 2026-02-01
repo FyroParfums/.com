@@ -34,10 +34,12 @@
         <div class="flex-1 max-w-2xl w-full mx-0 md:mx-10">
             <div class="relative flex shadow-inner">
                 <input type="text" id="mainSearch" 
-                    placeholder="Search Fragrance, Perfume, Others..." 
+                    oninput="showSuggestions()" 
+                    onkeyup="if(event.key === 'Enter') performSearch()"
+                    placeholder="Search Fragrance, Perfumes, News, Others..." 
                     class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm">
-                <button onclick="performSearch()" 
-                        class="bg-red-900 text-white px-6 rounded-r-md hover:bg-black transition-colors">
+                <div id="searchSuggestions" class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-md z-[200] hidden border border-t-0 border-gray-200"></div>
+                <button onclick="performSearch()" class="bg-red-900 text-white px-6 rounded-r-md">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -53,7 +55,7 @@
 <nav class="bg-white border-y">
     <div class="max-w-6xl mx-auto overflow-x-auto">
         <ul class="flex justify-center whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wider text-gray-700">
-            <li><a href="#" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Beranda</a></li>
+            <li><a href="#" class="block px-4 py-3 bg-red-900 text-white transition">Beranda</a></li>
             <li><a href="news.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">News</a></li>
             <li><a href="index.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Perfume</a></li>
         </ul>
@@ -74,7 +76,7 @@
                             </div>
                             <div class="mt-4">
                                 <span class="text-red-900 text-[10px] font-black uppercase tracking-tighter">New Release</span>
-                                <a href="news.html"><h3 class="text-2xl font-bold leading-tight mt-1 hover:text-red-900">Cara Mencari Aroma Parfum dengan Kualitas yang Terbaik untuk Perempuan.</h3></a>
+                                <a href="artikel1.html"><h3 class="text-2xl font-bold leading-tight mt-1 hover:text-red-900">Cara Mencari Aroma Parfum dengan Kualitas yang Terbaik untuk Perempuan.</h3></a>
                                 <p class="text-sm text-gray-600 mt-2 leading-relaxed">Dunia parfum terus berubah-ubah dan dari segi pemilihan tidak asal pilih aroma dan bentuk parfum, berikut tips penyaringan untuk parfum...</p>
                             </div>
                         </div>
@@ -82,7 +84,7 @@
                         <div class="flex gap-4 border-t pt-5 items-center group cursor-pointer">
                             <img src="https://image.idntimes.com/post/20211214/pexels-photo-965989-0398d0c0a9ce4005143c2d8c8496cd6a-ae295cb9e985c700db6b22b2628c591a.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75" class="w-24 h-24 object-cover rounded">
                             <div>
-                                <a href="news.html"><h4 class="text-sm font-bold group-hover:text-red-900">Mengenali Aroma Parfum Untuk Perempuan.</h4></a>
+                                <a href="artikel1.html"><h4 class="text-sm font-bold group-hover:text-red-900">Mengenali Aroma Parfum Untuk Perempuan.</h4></a>
                                 <p class="text-xs text-gray-500 mt-1">Berikut tips untuk mencari parfum untuk pacar...</p>
                             </div>
                         </div>
@@ -113,7 +115,7 @@
             </div>
         </div>
         <footer class="bg-gray-100 border-t mt-10 py-10 px-10 text-center text-gray-400 text-xs">
-            <p class="font-bold text-gray-600">FYRO.PARFUMS ®, Depok, Indonesia.</p>
+            <p class="font-bold text-gray-600">©FYRO.PARFUMS, Depok, Indonesia.</p>
             <p class="mt-2">Hubungi Kami.</p>
             <p>Instagram @fyroparfume.id</p>
         </footer>
