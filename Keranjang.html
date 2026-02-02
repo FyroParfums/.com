@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fyro.Parfums</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="Logo Head.jpeg" type="image/x-icon">
+</head>
+<body>
+
+<div class="main-wrapper">
+<header class="bg-white shadow-sm sticky top-0 z-[100]">
+    <div class="bg-gray-100 border-b py-1 px-4 md:px-10 flex justify-between items-center text-[10px] font-bold text-gray-500">
+        <div class="flex gap-4">
+            <span class="hover:text-red-900 cursor-pointer">IGNITE YOUR ESSENCE</span>
+        </div>
+        <div class="flex gap-4 uppercase">
+            <a href="Tentang Kami.html" class="hover:text-red-900">tentang kami</a>
+            <a href="#" class="hover:text-red-900">keranjang</a>
+            <a href="https://x.com/FyroParfums" class="hover:text-red-900">Komunitas</a>
+            <a href="#" class="hover:text-red-900 text-red-800"></a>
+        </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center px-4 md:px-10 py-4 gap-4">
+        <h1 class="text-4xl font-serif font-black tracking-tighter text-green-900 cursor-pointer flex flex-col items-center md:items-start" onclick="location.href='index.html'">
+            FYRO.PARFUMS
+            <span class="text-[10px] tracking-[0.2em] font-sans font-bold text-gray-500 uppercase mt-[-4px]">Eau De Parfume</span>
+        </h1>
+
+        <div class="flex-1 max-w-2xl w-full mx-0 md:mx-10">
+            <form action="javascript:void(0);" onsubmit="performSearch()" class="relative flex shadow-inner">
+                <input type="search" id="mainSearch" 
+                    oninput="showSuggestions()" 
+                    placeholder="Search Fragrance, Perfumes, News, others..." 
+                    inputmode="search"
+                    autocomplete="off"
+                    class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm appearance-none">
+                
+                <div id="searchSuggestions" class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-md z-[200] hidden border border-t-0 border-gray-200"></div>
+                
+                <button type="submit" class="bg-red-900 text-white px-6 rounded-r-md active:bg-red-700">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="hidden lg:flex gap-3 text-gray-400">
+            <a href="https://x.com/FyroParfums" target="_blank" class="fab fa-twitter hover:text-green-600 cursor-pointer"></a>
+            <a href="https://www.tiktok.com/@fyro.parfums?_t=ZS-8wz4pjT7dNh&_r=1" target="_blank" class="fab fa-tiktok hover:text-green-400 cursor-pointer"></a>
+            <a href="https://www.instagram.com/fyroparfume.id?igsh=MWVoaHkwbjY1b3Zwbw%3D%3D&utm_source=qr" target="_blank" class="fab fa-instagram hover:text-green-600 cursor-pointer"></a>
+        </div>
+    </div>
+
+<nav class="bg-white border-y">
+    <div class="max-w-6xl mx-auto overflow-x-auto">
+        <ul class="flex justify-center whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wider text-gray-700">
+            <li><a href="beranda.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Beranda</a></li>
+            <li><a href="news.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">News</a></li>
+            <li><a href="index.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Perfume</a></li>
+        </ul>
+    </div>
+</nav>
+</header>
+
+<div id="home-page" class="p-4 md:p-10">
+    
+    <section class="max-w-4xl mx-auto py-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black text-gray-800 uppercase tracking-tighter">Coming Soon</h2>
+            <div class="bg-red-900 h-1 w-20 mx-auto mt-2"></div>
+            <p class="mt-6 text-gray-600 leading-relaxed max-w-2xl mx-auto italic">
+                "Coming Soon pembelian lewat website. (saat ini hanya tersedia Tokopedia dan Shopee)"
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 border rounded-xl shadow-sm">
+                <h3 class="text-sm font-black text-red-900 uppercase tracking-widest mb-4 border-b pb-2">Hubungi Kami</h3>
+                <div class="space-y-4">
+                    <a href="https://wa.me/6282111491281" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-green-600 transition">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span class="text-sm font-bold">+62 821-1149-1281 (WhatsApp)</span>
+                    </a>
+                    <a href="https://www.instagram.com/fyroparfume.id" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-pink-600 transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                        <span class="text-sm font-bold">@fyroparfume.id</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@fyro.parfums" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-black transition">
+                        <i class="fab fa-tiktok text-xl"></i>
+                        <span class="text-sm font-bold">@fyro.parfums</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 border rounded-xl shadow-sm">
+                <h3 class="text-sm font-black text-red-900 uppercase tracking-widest mb-4 border-b pb-2">Belanja Online</h3>
+                <div class="space-y-4">
+                    <a href="https://shopee.co.id/fyro.parfums" target="_blank" class="flex items-center justify-between group">
+                        <div class="flex items-center gap-3 text-gray-700 group-hover:text-orange-600 transition">
+                            <i class="fa fa-shopping-bag text-xl"></i>
+                            <span class="text-sm font-bold">Shopee Official</span>
+                        </div>
+                        <i class="fa fa-external-link-alt text-xs text-gray-300"></i>
+                    </a>
+                    <a href="https://www.tokopedia.com/fyroparfums?utm_campaign=Shop-81138469-7496209910014053062-280126-contextual_image-semua_produk-LSfHao&utm_medium=share&utm_source=salinlink" target="_blank" class="flex items-center justify-between group">
+                        <div class="flex items-center gap-3 text-gray-700 group-hover:text-green-600 transition">
+                            <i class="fa fa-store text-xl"></i>
+                            <span class="text-sm font-bold">Tokopedia Official</span>
+                        </div>
+                        <i class="fa fa-external-link-alt text-xs text-gray-300"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-100 border-t mt-10 py-10 px-10 text-center text-gray-400 text-xs">
+        <p class="font-bold text-gray-600">©FYRO.PARFUMS, Depok, Indonesia.</p>
+        <p class="mt-2">Hubungi Kami.</p>
+        <p>Instagram @fyroparfume.id</p>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
