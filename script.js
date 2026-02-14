@@ -80,7 +80,7 @@ function showSuggestions() {
     if (matches.length > 0) {
         box.innerHTML = matches.map(item => `
             <div onclick="processNavigation('${item.name}')" 
-                 class="px-5 py-3 border-b hover:bg-gray-100 cursor-pointer flex justify-between items-center text-black">
+                class="px-5 py-3 border-b hover:bg-gray-100 cursor-pointer flex justify-between items-center text-black">
                 <div>
                     <span class="text-sm font-bold text-gray-800">${item.name}</span>
                     <p class="text-[10px] text-gray-400 uppercase">${item.brand}</p>
