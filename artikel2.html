@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fyro.Parfums</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="Logo Head.jpeg" type="image/x-icon">
+    <style>
+        /* Rata Kanan Kiri untuk paragraf */
+        .article-content p {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 1rem;
+        }
+        /* Posisi Artikel di tengah layar */
+        .max-width-center {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+<header class="bg-white shadow-sm sticky top-0 z-[100]">
+    <div class="bg-gray-100 border-b py-1 px-4 md:px-10 flex justify-between items-center text-[10px] font-bold text-gray-500">
+        <div class="flex gap-4">
+            <span class="hover:text-red-900 cursor-pointer">IGNITE YOUR ESSENCE</span>
+        </div>
+        <div class="flex gap-4 uppercase">
+            <a href="Tentang Kami.html" class="hover:text-red-900">tentang kami</a>
+            <a href="Keranjang.html" class="hover:text-red-900">keranjang</a>
+            <a href="https://x.com/FyroParfums" class="hover:text-red-900">Komunitas</a>
+            <a href="#" class="hover:text-red-900 text-red-800"></a>
+        </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center px-4 md:px-10 py-4 gap-4">
+        <h1 class="text-4xl font-serif font-black tracking-tighter text-green-900 cursor-pointer flex flex-col items-center md:items-start" onclick="location.href='index.html'">
+            FYRO.PARFUMS
+            <span class="text-[10px] tracking-[0.2em] font-sans font-bold text-gray-500 uppercase mt-[-4px]">Eau De Parfume</span>
+        </h1>
+
+        <div class="flex-1 max-w-2xl w-full mx-0 md:mx-10">
+            <form action="javascript:void(0);" onsubmit="performSearch()" class="relative flex shadow-inner">
+                <input type="search" id="mainSearch" 
+                    oninput="showSuggestions()" 
+                    placeholder="Search Fragrance, Perfumes, News, others..." 
+                    inputmode="search"
+                    autocomplete="off"
+                    class="w-full border-2 border-gray-300 rounded-l-md py-2 px-5 outline-none focus:border-green-900 text-sm appearance-none">
+                
+                <div id="searchSuggestions" class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-md z-[200] hidden border border-t-0 border-gray-200"></div>
+                
+                <button type="submit" class="bg-red-900 text-white px-6 rounded-r-md active:bg-red-700">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="hidden lg:flex gap-3 text-gray-400">
+            <a href="https://x.com/FyroParfums" target="_blank" class="fab fa-twitter hover:text-green-600 cursor-pointer"></a>
+            <a href="https://www.tiktok.com/@fyro.parfums?_t=ZS-8wz4pjT7dNh&_r=1" target="_blank" class="fab fa-tiktok hover:text-green-400 cursor-pointer"></a>
+            <a href="https://www.instagram.com/fyroparfume.id?igsh=MWVoaHkwbjY1b3Zwbw%3D%3D&utm_source=qr" target="_blank" class="fab fa-instagram hover:text-green-600 cursor-pointer"></a>
+        </div>
+    </div>
+
+<nav class="bg-white border-y">
+    <div class="max-w-6xl mx-auto overflow-x-auto">
+        <ul class="flex justify-center whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wider text-gray-700">
+            <li><a href="beranda.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Beranda</a></li>
+            <li><a href="#" class="block px-4 py-3 bg-red-900 text-white transition">News</a></li>
+            <li><a href="index.html" class="block px-4 py-3 hover:bg-red-900 hover:text-white transition">Perfume</a></li>
+        </ul>
+    </div>
+</nav>
+</header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 p-6 md:p-10">
+        
+        <article class="lg:col-span-8">
+            <div class="max-width-center">
+                <a href="news.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-red-900 font-bold text-[10px] uppercase tracking-widest mb-6 transition-colors">
+                    <i class="fa fa-arrow-left"></i> Kembali ke News
+                </a>
+
+                <header class="mb-8">
+                    <span class="text-red-900 font-sans font-bold text-xs uppercase tracking-widest">Tips</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 leading-tight text-gray-900">Hari Valentine Masih Belum Ketemu Aroma Parfum yang Cocok Untuk Pasangan? Disini Solusinya!</h1>
+                    <div class="flex items-center gap-4 mt-6 text-sm font-sans text-gray-500">
+                        <img src="Penulis.jpeg" class="w-10 h-10 rounded-full border">
+                        <div>
+                            <p class="italic text-gray-800"><span class="font-bold">Penulis:</span> Oleh Bagaskara P.</p>
+                            <p class="italic text-gray-800"><span class="font-bold">Editor:</span> Oleh Putra S.</p>
+                            <p>Diterbitkan pada 14 Februari 2026</p>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="mb-10 text-center">
+                    <img src="Foto Dasar Artikel 2.png" alt="Perfume Bottle" class="w-full h-auto md:h-[500px] object-cover rounded-sm shadow-lg mx-auto">
+                    <p class="text-xs text-gray-400 mt-2 italic font-sans">Source: Milik Pribadi</p>
+                </div>
+
+                <div class="article-content">
+                    <p class="font-bold">Tren Parfum Terbaik untuk Hari Valentine 2026: Aroma yang Paling Romantis dan Berkesan, Tips Berikut ini:</p>
+                    <p>Hari Valentine selalu identik dengan hadiah yang penuh makna dan emosional, dan parfum menjadi salah satu pilihan paling populer setiap tahunnya. Pada 2026, tren parfum Valentine menunjukkan perubahan menarik: konsumen tidak hanya mencari wangi yang indah, tetapi juga aroma yang mampu menciptakan suasana romantis, hangat, dan personal.
+
+Berdasarkan berbagai laporan tren fragrance terbaru, pemilihan parfum untuk Valentine kini lebih menekankan pengalaman emosional, karakter sensual, serta kesan yang membekas dalam momen spesial. Berikut tren parfum yang paling direkomendasikan untuk Hari Valentine 2026.</p>
+                    
+                    <div class="mb-10 text-center">
+                        <img src="https://malanginspirasi.com/wp-content/uploads/2026/02/020-Coklat-mawar-valentine-day.jpg" alt="Perfume Bottle" class="w-full h-auto md:h-[500px] object-cover rounded-sm shadow-lg mx-auto">
+                        <p class="text-xs text-gray-400 mt-2 italic font-sans">Source: malanginspirasi.com</p>
+                    </div>
+
+                    <p class="font-bold">1. Aroma Fruity Manis yang Ceria dan Menggoda</p>
+                    <p>Tren pertama yang mendominasi Valentine 2026 adalah parfum dengan aroma buah yang segar dan manis. Wewangian seperti cherry, peach, raspberry, dan pear banyak dipilih karena menghadirkan kesan ringan, playful, dan romantis.</p>
+                    <p>Aroma fruity sering digambarkan sebagai wangi yang “menggoda namun menyenangkan”. Karakter ini cocok untuk suasana Valentine yang identik dengan kebahagiaan, keintiman, dan energi positif. Selain itu, aroma buah memberikan kesan muda, cerah, dan mudah disukai oleh banyak orang.</p>
+                    <p>Menurut laporan tren hadiah Valentine dari New York Post, parfum dengan nuansa edible-inspired seperti buah manis menjadi pilihan populer karena menciptakan sensasi yang terasa akrab dan menggugah emosi. Aroma yang menyerupai sesuatu yang “lezat” secara psikologis dianggap mampu memperkuat kesan romantis dan daya tarik personal.</p>
+                    <p>Aroma fruity cocok untuk malam santai atau first date, suasana romantis, perempuan dengan karakter ceria.</p>
+
+                    <p class="font-bold">2. Parfum Gourmand Hangat untuk Suasana Intim dan Sensual</p>
+                    <p>Jika fruity memberikan kesan playful, tren kedua menghadirkan nuansa yang lebih dalam dan menggoda: parfum gourmand. Jenis aroma ini terinspirasi dari makanan manis seperti cokelat, vanilla, karamel, atau dessert hangat.</p>
+                    <p>Pada 2026, parfum bernuansa cokelat menjadi sorotan karena dianggap mampu menciptakan suasana romantis yang lebih intens dan elegan. Wangi gourmand sering dikaitkan dengan rasa nyaman, kemewahan, dan kedekatan emosional — faktor yang sangat relevan dengan momen Valentine.</p>
+                    <p>Menurut laporan tren fragrance dari *Who What Wear*, parfum berbasis cokelat semakin populer karena memberikan kombinasi unik antara sensualitas dan kenyamanan. Banyak formulasi modern menggabungkan cokelat dengan rose, oud, tonka bean, atau vanilla untuk menghasilkan aroma yang kompleks dan berlapis.</p>
+                    <p>Parfum gourmand cocok untuk makan malam romantis, suasana intim dan elegan, gaya feminim yang dewasa.</p>
+
+                    <p class="font-bold">3. Floral Hangat yang Tetap Jadi Pilihan Klasik</p>
+                    <p>Meskipun tren baru terus bermunculan, parfum floral tetap menjadi pilihan klasik untuk Valentine. Namun, pada 2026, floral hadir dalam versi yang lebih modern dan hangat.</p>
+                    <p>Aroma bunga tidak lagi sekadar ringan dan segar, tetapi sering dipadukan dengan sentuhan citrus lembut atau base notes yang hangat untuk menciptakan kesan romantis yang lebih dalam. Kombinasi ini membuat parfum floral terasa lebih elegan, feminin, dan fleksibel untuk berbagai suasana.</p>
+                    <p>Banyak kampanye parfum musiman yang dibagikan melalui Instagram menunjukkan bahwa floral dengan karakter lembut dan menenangkan tetap menjadi favorit karena sifatnya yang timeless dan universal. Aroma bunga memberikan kesan kasih sayang, kelembutan, dan keindahan — simbol yang sangat melekat dengan makna Valentine.</p>
+                    <p>Parfum floral cocok untuk hadiah romantis classic, penggunaan siang hingga malam, gaya feminim lembut dan elegan.</p>
+                
+                    <p class="font-bold">4. Makna di Balik Tren Parfum Valentine 2026</p>
+                    <p>Jika dirangkum, tren parfum Valentine tahun ini tidak hanya berfokus pada wangi yang enak, tetapi pada bagaimana aroma tersebut membangun suasana emosional.</p>
+                    <p>Tiga karakter utama yang mendominasi adalah Playful Romance, Deep Intimacy, Timeless Love</p>
+                    <p>Ketiganya memiliki satu kesamaan: mampu membangkitkan perasaan nyaman, hangat, dan dekat secara emosional.</p>
+                </div>
+
+                <div class="mt-12 p-6 md:p-8 bg-gray-50 border-l-4 border-red-900 rounded-sm shadow-sm article-content">
+                    <p class="font-bold text-lg text-gray-800">Kesimpulan:</p>
+                    <p class="text-gray-700 leading-relaxed italic">
+                        Tren parfum terbaik untuk Hari Valentine 2026 menunjukkan bahwa aroma memiliki peran penting dalam menciptakan suasana romantis. Pilihan parfum kini tidak hanya berdasarkan preferensi wangi, tetapi juga pengalaman emosional yang ingin dihadirkan.
+Aroma fruity menghadirkan keceriaan dan daya tarik yang playful, gourmand menciptakan kehangatan sensual yang mendalam, sementara floral tetap menjadi simbol romantisme klasik yang elegan. Dengan memilih parfum yang sesuai dengan suasana dan karakter pribadi, hadiah Valentine menjadi lebih bermakna dan berkesan.
+Pada akhirnya, parfum terbaik untuk Valentine adalah yang mampu menciptakan momen emosional bukan hanya wangi yang indah, tetapi juga perasaan yang tertinggal lama setelahnya.
+                    </p>
+                </div>
+
+                <div class="mt-8 flex flex-wrap gap-2">
+                    <span class="text-xs font-bold text-gray-400 uppercase self-center mr-2">Tags:</span>
+                    <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Valentine Day</a>
+                    <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Trend 2026</a>
+                    <a href="#" class="bg-gray-100 px-3 py-1 text-xs rounded-full hover:bg-red-900 hover:text-white mr-2">Parfume Valentine</a>
+                </div>
+            </div>
+        </article>
+
+        <aside class="lg:col-span-4 font-sans">
+            <h2 class="section-title">Artikel Terkait</h2>
+            <div class="space-y-6">
+                <div class="flex gap-4 group cursor-pointer">
+                    <img src="https://mmc.tirto.id/image/otf/1240x0,q70/2024/05/03/ilustrasi-parfum-istockphoto_ratio-16x9.jpg" class="w-20 h-20 object-cover rounded shadow-sm">
+                    <div>
+                        <a href="artikel1.html" class="block">
+                            <h4 class="text-sm font-bold leading-tight group-hover:text-red-900">Cara Mencari Aroma Parfum dengan Kualitas yang Terbaik untuk Perempuan.</h4>
+                        </a>
+                        <p class="text-[10px] text-gray-400 mt-1 uppercase">Hot News</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-gray-100 p-6 text-center rounded border-2 border-dashed border-gray-300">
+                <p class="text-xs text-gray-400 uppercase mb-4 tracking-widest">Advertisement</p>
+                <a href="https://www.anugerahprint.com/" target="_blank" class="block group relative overflow-hidden rounded shadow-md">
+                    <img src="AP.jpeg" class="w-full h-auto transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                        <span class="bg-white text-black text-[10px] font-bold px-4 py-2 uppercase tracking-tighter">Kunjungi Sekarang</span>
+                    </div>
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="bg-gray-100 border-t mt-10 py-10 px-10 text-center text-gray-400 text-xs">
+        <p class="font-bold text-gray-600">FYRO.PARFUMS ®, Depok, Indonesia.</p>
+        <p class="mt-2">Hubungi Kami.</p>
+        <p>Instagram @fyroparfume.id</p>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
