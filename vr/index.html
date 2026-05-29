@@ -68,29 +68,49 @@ let walking = false;
 // masuk VR
 function enterVR() {
   const scene = document.querySelector('#scene');
-  scene.enterVR();
+
+  // iOS gyro permission
+  if (
+    typeof DeviceOrientationEvent !== "undefined" &&
+    typeof DeviceOrientationEvent.requestPermission === "function"
+  ) {
+    DeviceOrientationEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === "granted") {
+          scene.enterVR();
+        }
+      })
+      .catch(console.error);
+  } else {
+    scene.enterVR();
+  }
 }
 
-// TOUCH CONTROL = JALAN MAJU
-document.addEventListener('touchstart', () => {
+// 🔥 TOUCH START = JALAN
+window.addEventListener('touchstart', () => {
   walking = true;
-});
+}, { passive: true });
 
-document.addEventListener('touchend', () => {
+// 🔥 TOUCH END = BERHENTI
+window.addEventListener('touchend', () => {
   walking = false;
-});
+}, { passive: true });
 
-// gerakan maju
+// 🔥 GERAK MAJU SESUAI ARAH KAMERA
 function tick() {
+
   if (walking) {
+
     let pos = rig.getAttribute('position');
+
     let camera = document.querySelector('#camera');
 
-    let dir = new THREE.Vector3();
-    camera.object3D.getWorldDirection(dir);
+    let direction = new THREE.Vector3();
 
-    pos.x -= dir.x * 0.03;
-    pos.z -= dir.z * 0.03;
+    camera.object3D.getWorldDirection(direction);
+
+    pos.x -= direction.x * 0.05;
+    pos.z -= direction.z * 0.05;
 
     rig.setAttribute('position', pos);
   }
