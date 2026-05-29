@@ -63,6 +63,7 @@
 
 <script>
 let rig = document.querySelector('#rig');
+
 let walking = false;
 
 // ENTER VR
@@ -70,11 +71,12 @@ async function enterVR() {
 
   const scene = document.querySelector('#scene');
 
-  // iOS gyro permission
+  // IOS PERMISSION
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
   ) {
+
     try {
 
       const permission =
@@ -82,44 +84,35 @@ async function enterVR() {
 
       if (permission !== "granted") return;
 
-    } catch (e) {
+    } catch(e) {
       console.log(e);
     }
   }
 
-  await scene.enterVR();
-
-  // 🔥 WAIT XR SESSION READY
-  setTimeout(() => {
-
-    const xrSession =
-      scene.renderer.xr.getSession();
-
-    if (!xrSession) {
-      console.log("XR SESSION NOT FOUND");
-      return;
-    }
-
-    // 🔥 TOUCH HOLD IN VR
-    xrSession.addEventListener("selectstart", () => {
-      walking = true;
-    });
-
-    // 🔥 RELEASE TOUCH
-    xrSession.addEventListener("selectend", () => {
-      walking = false;
-    });
-
-  }, 1000);
+  scene.enterVR();
 }
 
-// 🔥 MOVE LOOP
+// 🔥 MOVE ZONE
+const moveZone =
+  document.querySelector("#moveZone");
+
+// HOLD = WALK
+moveZone.addEventListener("touchstart", () => {
+  walking = true;
+}, { passive:true });
+
+// RELEASE = STOP
+moveZone.addEventListener("touchend", () => {
+  walking = false;
+}, { passive:true });
+
+// MOVE LOOP
 function animate() {
 
   if (walking) {
 
     const camera =
-      document.querySelector('#camera');
+      document.querySelector("#camera");
 
     const direction =
       new THREE.Vector3();
@@ -136,5 +129,20 @@ function animate() {
 animate();
 </script>
 
+<!-- 🔥 VR MOVE BUTTON -->
+<div id="moveZone"></div>
+
+<style>
+#moveZone{
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:50%;
+  height:100%;
+  z-index:9999;
+  background:transparent;
+}
+</style>
+  
 </body>
 </html>
