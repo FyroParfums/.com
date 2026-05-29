@@ -66,37 +66,39 @@ let rig = document.querySelector('#rig');
 let walking = false;
 
 // masuk VR
-function enterVR() {
+async function enterVR() {
+
   const scene = document.querySelector('#scene');
 
-  // iOS gyro permission
+  // iOS permission
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
   ) {
-    DeviceOrientationEvent.requestPermission()
-      .then(permissionState => {
-        if (permissionState === "granted") {
-          scene.enterVR();
-        }
-      })
-      .catch(console.error);
-  } else {
-    scene.enterVR();
+    try {
+      const permission = await DeviceOrientationEvent.requestPermission();
+
+      if (permission !== "granted") {
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
+
+  scene.enterVR();
 }
 
-// 🔥 TOUCH START = JALAN
-window.addEventListener('touchstart', () => {
+// 🔥 FIX TOUCH VR ANDROID + IOS
+document.body.addEventListener('touchstart', function(e) {
   walking = true;
 }, { passive: true });
 
-// 🔥 TOUCH END = BERHENTI
-window.addEventListener('touchend', () => {
+document.body.addEventListener('touchend', function(e) {
   walking = false;
 }, { passive: true });
 
-// 🔥 GERAK MAJU SESUAI ARAH KAMERA
+// 🔥 GERAK MAJU
 function tick() {
 
   if (walking) {
@@ -109,8 +111,9 @@ function tick() {
 
     camera.object3D.getWorldDirection(direction);
 
-    pos.x -= direction.x * 0.05;
-    pos.z -= direction.z * 0.05;
+    // GERAK MAJU SESUAI ARAH PANDANG
+    pos.x -= direction.x * 0.08;
+    pos.z -= direction.z * 0.08;
 
     rig.setAttribute('position', pos);
   }
@@ -119,6 +122,17 @@ function tick() {
 }
 
 tick();
+
+// 🔥 ANDROID VR FIX
+AFRAME.scenes[0].addEventListener('enter-vr', () => {
+
+  // force focus canvas
+  const canvas = document.querySelector('canvas');
+
+  if (canvas) {
+    canvas.style.touchAction = "none";
+  }
+});
 </script>
 
 </body>
