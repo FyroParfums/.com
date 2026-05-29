@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+
+    #ui {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
+
+    button {
+      padding: 10px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="ui">
+  <button onclick="enterVR()">ENTER VR</button>
+</div>
+
+<a-scene
+
+
+  id="scene"
+  webxr="optionalFeatures: local-floor, bounded-floor;"
+  vr-mode-ui="enabled: true"
+  device-orientation-permission-ui="enabled: true"
+>
+
+  <!-- CAMERA -->
+  <a-entity id="rig" position="0 0 0">
+    <a-camera id="camera" position="0 1.6 3" look-controls wasd-controls></a-camera>
+  </a-entity>
+
+  <!-- 💡 LIGHT (SOFT CINEMATIC, TIDAK TERLALU TERANG) -->
+  <a-light type="ambient" intensity="0.6" color="#ffd2b3"></a-light>
+  <a-light type="directional" intensity="0.7" position="2 4 2" color="#ffbfa0"></a-light>
+  <a-entity light="type: spot; intensity: 0.8; angle: 35; penumbra: 0.6" position="0 4 2" rotation="-90 0 0"></a-entity>
+
+  <!-- 🌅 SKY SENJA SOFT -->
+  <a-sky color="#7a4f3d"></a-sky>
+
+  <!-- 🧱 FLOOR -->
+  <a-plane rotation="-90 0 0" width="20" height="20" color="#1f1f1f"></a-plane>
+
+  <!-- 🧱 BACK WALL -->
+  <a-box position="0 3 -6" width="20" height="6" depth="0.2" color="#d8c3a5"></a-box>
+
+  <!-- 🪑 TABLE -->
+  <a-cylinder position="0 1 0" radius="0.4" height="0.1" color="#4a3b2a"></a-cylinder>
+  <a-cylinder position="0 0.5 0" radius="0.1" height="1" color="#3a2b1f"></a-cylinder>
+
+  <!-- 🔧 MAIN PRODUCT -->
+  <a-entity position="0 1.5 0" scale="5 5 5">
+    <a-gltf-model src="scene.glb" rotation="0 180 0"></a-gltf-model>
+  </a-entity>
+
+  <!-- 🧱 SIDE PEDESTAL -->
+  <a-box position="2 0.7 -1" width="0.8" height="1.4" depth="0.8" color="#2b2b2b"></a-box>
+
+  <!-- 🪴 PLANT LEFT -->
+  <a-entity position="-2.5 0 -2">
+    <a-cylinder height="0.5" radius="0.3" color="#4a3b2a"></a-cylinder>
+    <a-sphere position="0 1 0" radius="0.8" color="#1f7a1f"></a-sphere>
+  </a-entity>
+
+  <!-- 🪴 PLANT RIGHT -->
+  <a-entity position="2.5 0 -2">
+    <a-cylinder height="0.5" radius="0.3" color="#4a3b2a"></a-cylinder>
+    <a-sphere position="0 1 0" radius="0.8" color="#1f7a1f"></a-sphere>
+  </a-entity>
+
+  <!-- 📚 BOOK / CATALOG (DI MEJA) -->
+  <a-box position="-0.8 1.1 0.3" width="0.3" height="0.05" depth="0.4" color="#3b5b8a"></a-box>
+
+  <!-- 📄 BROCHURE -->
+  <a-box position="-0.5 1.1 -0.3" width="0.2" height="0.03" depth="0.3" color="#c9c9c9"></a-box>
+
+  <!-- 🪑 SMALL STOOL (DEKOR KURSI TAMBAHAN) -->
+  <a-cylinder position="1.5 0.5 1.5" radius="0.2" height="0.6" color="#5a3d2b"></a-cylinder>
+
+  <!-- 🧱 DISPLAY STAND KECIL -->
+  <a-box position="-2 0.6 1.5" width="0.5" height="1.2" depth="0.5" color="#333"></a-box>
+
+  <!-- 🌟 FLOATING DECOR LIGHT (BIAR AESTHETIC) -->
+  <a-sphere position="0 3 -2" radius="0.05" color="#ffd2b3"></a-sphere>
+  <a-sphere position="1 2.5 -2" radius="0.04" color="#ffd2b3"></a-sphere>
+  <a-sphere position="-1 2.8 -2" radius="0.04" color="#ffd2b3"></a-sphere>
+
+</a-scene>
+
+<script>
+let rig = document.querySelector('#rig');
+let walking = false;
+
+// masuk VR
+function enterVR() {
+  const scene = document.querySelector('#scene');
+  scene.enterVR();
+}
+
+// TOUCH CONTROL = JALAN MAJU
+document.addEventListener('touchstart', () => {
+  walking = true;
+});
+
+document.addEventListener('touchend', () => {
+  walking = false;
+});
+
+// gerakan maju
+function tick() {
+  if (walking) {
+    let pos = rig.getAttribute('position');
+    let camera = document.querySelector('#camera');
+
+    let dir = new THREE.Vector3();
+    camera.object3D.getWorldDirection(dir);
+
+    pos.x -= dir.x * 0.03;
+    pos.z -= dir.z * 0.03;
+
+    rig.setAttribute('position', pos);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+tick();
+</script>
+
+</body>
+</html>
