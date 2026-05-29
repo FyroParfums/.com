@@ -67,14 +67,12 @@
 
 <script>
 let rig = document.querySelector('#rig');
-
 let walking = false;
 
 // ENTER VR
 async function enterVR() {
 
-  const scene =
-    document.querySelector('#scene');
+  const scene = document.querySelector('#scene');
 
   // IOS permission
   if (
@@ -94,31 +92,36 @@ async function enterVR() {
     }
   }
 
-  // ENTER XR
   await scene.enterVR();
-
-  // WAIT XR SESSION
-  setTimeout(() => {
-
-    const xrSession =
-      scene.renderer.xr.getSession();
-
-    if (!xrSession) {
-      console.log("XR SESSION FAILED");
-      return;
-    }
-
-    // 🔥 TOUCH SCREEN IN CARDBOARD VR
-    xrSession.addEventListener("selectstart", () => {
-      walking = true;
-    });
-
-    xrSession.addEventListener("selectend", () => {
-      walking = false;
-    });
-
-  }, 1000);
 }
+
+// 🔥 ANDROID VR TOUCH POLLING
+setInterval(() => {
+
+  // cek sentuhan aktif di layar
+  if (navigator.maxTouchPoints > 0) {
+
+    if (document.visibilityState === "visible") {
+
+      // paksa detect finger
+      if (window.__touching === true) {
+        walking = true;
+      } else {
+        walking = false;
+      }
+    }
+  }
+
+}, 16);
+
+// 🔥 GLOBAL TOUCH TRACK
+window.addEventListener("touchstart", () => {
+  window.__touching = true;
+}, { passive:true });
+
+window.addEventListener("touchend", () => {
+  window.__touching = false;
+}, { passive:true });
 
 // MOVE LOOP
 function animate() {
