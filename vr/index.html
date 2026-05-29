@@ -1,71 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-
-  <style>
-    body { margin: 0; overflow: hidden; }
-
-    #ui {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 999;
-    }
-
-    button {
-      padding: 10px;
-      margin-right: 5px;
-    }
-  </style>
-</head>
-
-<body>
-
-<div id="ui">
-  <button onclick="enterVR()">ENTER VR</button>
-</div>
-
-<a-scene
-
-  id="scene"
-  webxr="optionalFeatures: local-floor, bounded-floor;"
-  vr-mode-ui="enabled: true"
-  device-orientation-permission-ui="enabled: true"
-
-  vr-render-mode="stereo"
-
-  renderer="antialias: true"
-
-  cursor="rayOrigin: mouse"
-
->
-  <!-- CAMERA -->
-  <a-entity id="rig" position="0 0 0">
-    <a-camera id="camera" position="1 1.3 -1" look-controls wasd-controls></a-camera>
-  </a-entity>
-
-  <!-- 💡 LIGHT (SOFT CINEMATIC, TIDAK TERLALU TERANG) -->
-  <a-light type="ambient" intensity="0.6" color="#ffd2b3"></a-light>
-  <a-light type="directional" intensity="0.7" position="2 4 2" color="#ffbfa0"></a-light>
-  <a-entity light="type: spot; intensity: 0.8; angle: 35; penumbra: 0.6" position="0 4 2" rotation="-90 0 0"></a-entity>
-
-  <!-- 🌅 SKY SENJA SOFT -->
-  <a-sky color="#7a4f3d"></a-sky>
-
-  <!-- 🧱 FLOOR -->
-  <a-plane rotation="-90 0 0" width="20" height="20" color="#1f1f1f"></a-plane>
-
-  <!-- 🔧 MAIN PRODUCT -->
-  <a-entity position="0 0.5 0" scale="5 5 5">
-    <a-gltf-model src="scene.glb" rotation="0 180 0"></a-gltf-model>
-  </a-entity>
-
-</a-scene>
-
 <script>
 let rig = document.querySelector('#rig');
 let walking = false;
@@ -92,48 +24,51 @@ async function enterVR() {
 
   scene.enterVR();
 
-  // 🔥 IMPORTANT ANDROID FIX
+  // 🔥 TUNGGU CANVAS VR AKTIF
   setTimeout(() => {
 
     const canvas = scene.canvas;
 
-    // TOUCH HOLD = WALK
-    canvas.addEventListener('pointerdown', () => {
+    if (!canvas) return;
+
+    // 🔥 HOLD TOUCH = WALK
+    canvas.addEventListener("touchstart", () => {
+      walking = true;
+    }, { passive: true });
+
+    canvas.addEventListener("touchend", () => {
+      walking = false;
+    }, { passive: true });
+
+    // 🔥 ANDROID WEBXR FALLBACK
+    canvas.addEventListener("mousedown", () => {
       walking = true;
     });
 
-    // RELEASE = STOP
-    canvas.addEventListener('pointerup', () => {
+    canvas.addEventListener("mouseup", () => {
       walking = false;
     });
 
-    canvas.addEventListener('pointercancel', () => {
-      walking = false;
-    });
-
-  }, 1000);
+  }, 1500);
 }
 
 // 🔥 MOVE LOOP
-function tick() {
+function animate() {
 
   if (walking) {
 
     const camera = document.querySelector('#camera');
 
-    const dir = new THREE.Vector3();
+    const direction = new THREE.Vector3();
 
-    camera.object3D.getWorldDirection(dir);
+    camera.object3D.getWorldDirection(direction);
 
-    rig.object3D.position.x -= dir.x * 0.08;
-    rig.object3D.position.z -= dir.z * 0.08;
+    rig.object3D.position.x -= direction.x * 0.08;
+    rig.object3D.position.z -= direction.z * 0.08;
   }
 
-  requestAnimationFrame(tick);
+  requestAnimationFrame(animate);
 }
 
-tick();
+animate();
 </script>
-
-</body>
-</html>
