@@ -2,12 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+  <!-- FULLSCREEN MOBILE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
 
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 
   <style>
-    body { margin: 0; overflow: hidden; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+      touch-action: none;
+    }
 
     #ui {
       position: fixed;
@@ -20,6 +29,13 @@
       padding: 10px;
       margin-right: 5px;
     }
+
+    a-scene {
+      position: fixed !important;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
   </style>
 </head>
 
@@ -31,24 +47,32 @@
 
 <a-scene
 
-
   id="scene"
   webxr="optionalFeatures: local-floor, bounded-floor;"
   vr-mode-ui="enabled: true"
   device-orientation-permission-ui="enabled: true"
+
 >
 
   <!-- CAMERA -->
   <a-entity id="rig" position="0 0 0">
-    <a-camera id="camera" position="1 1.3 -1" look-controls wasd-controls></a-camera>
+
+    <!-- 🔥 ANDROID + IOS GYRO FIX -->
+    <a-camera
+      id="camera"
+      position="1 1.3 -1"
+      look-controls="touchEnabled: true; magicWindowTrackingEnabled: true;"
+      wasd-controls-enabled="false">
+    </a-camera>
+
   </a-entity>
 
-  <!-- 💡 LIGHT (SOFT CINEMATIC, TIDAK TERLALU TERANG) -->
+  <!-- 💡 LIGHT -->
   <a-light type="ambient" intensity="0.6" color="#ffd2b3"></a-light>
   <a-light type="directional" intensity="0.7" position="2 4 2" color="#ffbfa0"></a-light>
   <a-entity light="type: spot; intensity: 0.8; angle: 35; penumbra: 0.6" position="0 4 2" rotation="-90 0 0"></a-entity>
 
-  <!-- 🌅 SKY SENJA SOFT -->
+  <!-- 🌅 SKY -->
   <a-sky color="#7a4f3d"></a-sky>
 
   <!-- 🧱 FLOOR -->
@@ -65,8 +89,36 @@
 let rig = document.querySelector('#rig');
 let walking = false;
 
-// masuk VR
-function enterVR() {
+// 🔥 ENTER VR + FULLSCREEN + ANDROID GYRO FIX
+async function enterVR() {
+
+  // iOS permission
+  if (
+    typeof DeviceOrientationEvent !== "undefined" &&
+    typeof DeviceOrientationEvent.requestPermission === "function"
+  ) {
+    try {
+      const permission = await DeviceOrientationEvent.requestPermission();
+
+      if (permission !== "granted") {
+        alert("Gyroscope permission denied");
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  // fullscreen
+  const el = document.documentElement;
+
+  if (el.requestFullscreen) {
+    el.requestFullscreen();
+  } else if (el.webkitRequestFullscreen) {
+    el.webkitRequestFullscreen();
+  }
+
+  // enter vr
   const scene = document.querySelector('#scene');
   scene.enterVR();
 }
@@ -82,7 +134,9 @@ document.addEventListener('touchend', () => {
 
 // gerakan maju
 function tick() {
+
   if (walking) {
+
     let pos = rig.getAttribute('position');
     let camera = document.querySelector('#camera');
 
@@ -99,6 +153,11 @@ function tick() {
 }
 
 tick();
+
+// 🔥 FORCE MOBILE RESIZE FIX
+window.addEventListener("resize", () => {
+  document.body.style.height = window.innerHeight + "px";
+});
 </script>
 
 </body>
