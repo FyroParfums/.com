@@ -70,13 +70,15 @@ async function enterVR() {
 
   const scene = document.querySelector('#scene');
 
-  // iOS permission
+  // iOS gyro permission
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
   ) {
     try {
-      const permission = await DeviceOrientationEvent.requestPermission();
+
+      const permission =
+        await DeviceOrientationEvent.requestPermission();
 
       if (permission !== "granted") return;
 
@@ -85,34 +87,30 @@ async function enterVR() {
     }
   }
 
-  scene.enterVR();
+  await scene.enterVR();
 
-  // 🔥 TUNGGU CANVAS VR AKTIF
+  // 🔥 WAIT XR SESSION READY
   setTimeout(() => {
 
-    const canvas = scene.canvas;
+    const xrSession =
+      scene.renderer.xr.getSession();
 
-    if (!canvas) return;
+    if (!xrSession) {
+      console.log("XR SESSION NOT FOUND");
+      return;
+    }
 
-    // 🔥 HOLD TOUCH = WALK
-    canvas.addEventListener("touchstart", () => {
-      walking = true;
-    }, { passive: true });
-
-    canvas.addEventListener("touchend", () => {
-      walking = false;
-    }, { passive: true });
-
-    // 🔥 ANDROID WEBXR FALLBACK
-    canvas.addEventListener("mousedown", () => {
+    // 🔥 TOUCH HOLD IN VR
+    xrSession.addEventListener("selectstart", () => {
       walking = true;
     });
 
-    canvas.addEventListener("mouseup", () => {
+    // 🔥 RELEASE TOUCH
+    xrSession.addEventListener("selectend", () => {
       walking = false;
     });
 
-  }, 1500);
+  }, 1000);
 }
 
 // 🔥 MOVE LOOP
@@ -120,9 +118,11 @@ function animate() {
 
   if (walking) {
 
-    const camera = document.querySelector('#camera');
+    const camera =
+      document.querySelector('#camera');
 
-    const direction = new THREE.Vector3();
+    const direction =
+      new THREE.Vector3();
 
     camera.object3D.getWorldDirection(direction);
 
