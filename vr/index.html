@@ -31,13 +31,18 @@
 
 <a-scene
 
-
   id="scene"
   webxr="optionalFeatures: local-floor, bounded-floor;"
   vr-mode-ui="enabled: true"
   device-orientation-permission-ui="enabled: true"
->
 
+  vr-render-mode="stereo"
+
+  renderer="antialias: true"
+
+  cursor="rayOrigin: mouse"
+
+>
   <!-- CAMERA -->
   <a-entity id="rig" position="0 0 0">
     <a-camera id="camera" position="1 1.3 -1" look-controls wasd-controls></a-camera>
@@ -70,7 +75,7 @@ async function enterVR() {
 
   const scene = document.querySelector('#scene');
 
-  // iOS permission
+  // iOS gyro permission
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
@@ -89,48 +94,67 @@ async function enterVR() {
   scene.enterVR();
 }
 
-// 🔥 FIX TOUCH VR ANDROID + IOS
-document.body.addEventListener('touchstart', function(e) {
-  walking = true;
-}, { passive: true });
+// 🔥 ANDROID VR TOUCH FIX
+window.addEventListener(
+  "touchstart",
+  function () {
+    walking = true;
+  },
+  true
+);
 
-document.body.addEventListener('touchend', function(e) {
-  walking = false;
-}, { passive: true });
+window.addEventListener(
+  "touchend",
+  function () {
+    walking = false;
+  },
+  true
+);
 
-// 🔥 GERAK MAJU
-function tick() {
+// 🔥 FORCE WALK IN VR MODE
+function moveForward() {
 
-  if (walking) {
+  if (!walking) return;
 
-    let pos = rig.getAttribute('position');
+  const pos = rig.object3D.position;
 
-    let camera = document.querySelector('#camera');
+  const cam = document.querySelector("#camera");
 
-    let direction = new THREE.Vector3();
+  const dir = new THREE.Vector3();
 
-    camera.object3D.getWorldDirection(direction);
+  cam.object3D.getWorldDirection(dir);
 
-    // GERAK MAJU SESUAI ARAH PANDANG
-    pos.x -= direction.x * 0.08;
-    pos.z -= direction.z * 0.08;
-
-    rig.setAttribute('position', pos);
-  }
-
-  requestAnimationFrame(tick);
+  pos.x -= dir.x * 0.08;
+  pos.z -= dir.z * 0.08;
 }
 
-tick();
+// 🔥 LOOP
+function animate() {
 
-// 🔥 ANDROID VR FIX
-AFRAME.scenes[0].addEventListener('enter-vr', () => {
+  moveForward();
 
-  // force focus canvas
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// 🔥 FIX CANVAS TOUCH IN ANDROID VR
+document.querySelector('a-scene').addEventListener('renderstart', () => {
+
   const canvas = document.querySelector('canvas');
 
   if (canvas) {
+
+    canvas.style.pointerEvents = "auto";
     canvas.style.touchAction = "none";
+
+    canvas.addEventListener("touchstart", () => {
+      walking = true;
+    }, true);
+
+    canvas.addEventListener("touchend", () => {
+      walking = false;
+    }, true);
   }
 });
 </script>
