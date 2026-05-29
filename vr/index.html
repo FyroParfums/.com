@@ -25,16 +25,20 @@
 
 <body>
 
+<div id="overlay"></div>
+
 <div id="ui">
   <button onclick="enterVR()">ENTER VR</button>
 </div>
 
 <a-scene
 
-
   id="scene"
-  webxr="optionalFeatures: local-floor, bounded-floor;"
+
+  webxr="optionalFeatures: local-floor, bounded-floor; overlayElement: #overlay;"
+
   vr-mode-ui="enabled: true"
+
   device-orientation-permission-ui="enabled: true"
 >
 
@@ -63,18 +67,21 @@
 
 <script>
 let rig = document.querySelector('#rig');
+
 let walking = false;
 
 // ENTER VR
 async function enterVR() {
 
-  const scene = document.querySelector('#scene');
+  const scene =
+    document.querySelector('#scene');
 
-  // iOS permission
+  // IOS permission
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
   ) {
+
     try {
 
       const permission =
@@ -87,27 +94,33 @@ async function enterVR() {
     }
   }
 
-  scene.enterVR();
+  // ENTER XR
+  await scene.enterVR();
+
+  // WAIT XR SESSION
+  setTimeout(() => {
+
+    const xrSession =
+      scene.renderer.xr.getSession();
+
+    if (!xrSession) {
+      console.log("XR SESSION FAILED");
+      return;
+    }
+
+    // 🔥 TOUCH SCREEN IN CARDBOARD VR
+    xrSession.addEventListener("selectstart", () => {
+      walking = true;
+    });
+
+    xrSession.addEventListener("selectend", () => {
+      walking = false;
+    });
+
+  }, 1000);
 }
 
-// 🔥 GLOBAL TOUCH FIX ANDROID VR
-document.addEventListener("touchstart", function () {
-  walking = true;
-}, true);
-
-document.addEventListener("touchend", function () {
-  walking = false;
-}, true);
-
-document.addEventListener("mousedown", function () {
-  walking = true;
-}, true);
-
-document.addEventListener("mouseup", function () {
-  walking = false;
-}, true);
-
-// 🔥 MOVE LOOP
+// MOVE LOOP
 function animate() {
 
   if (walking) {
