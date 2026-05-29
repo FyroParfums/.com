@@ -63,7 +63,6 @@
 
 <script>
 let rig = document.querySelector('#rig');
-
 let walking = false;
 
 // ENTER VR
@@ -71,12 +70,11 @@ async function enterVR() {
 
   const scene = document.querySelector('#scene');
 
-  // IOS PERMISSION
+  // iOS permission
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
   ) {
-
     try {
 
       const permission =
@@ -92,21 +90,24 @@ async function enterVR() {
   scene.enterVR();
 }
 
-// 🔥 MOVE ZONE
-const moveZone =
-  document.querySelector("#moveZone");
-
-// HOLD = WALK
-moveZone.addEventListener("touchstart", () => {
+// 🔥 GLOBAL TOUCH FIX ANDROID VR
+document.addEventListener("touchstart", function () {
   walking = true;
-}, { passive:true });
+}, true);
 
-// RELEASE = STOP
-moveZone.addEventListener("touchend", () => {
+document.addEventListener("touchend", function () {
   walking = false;
-}, { passive:true });
+}, true);
 
-// MOVE LOOP
+document.addEventListener("mousedown", function () {
+  walking = true;
+}, true);
+
+document.addEventListener("mouseup", function () {
+  walking = false;
+}, true);
+
+// 🔥 MOVE LOOP
 function animate() {
 
   if (walking) {
