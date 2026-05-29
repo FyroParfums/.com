@@ -70,12 +70,12 @@
 let rig = document.querySelector('#rig');
 let walking = false;
 
-// masuk VR
+// ENTER VR
 async function enterVR() {
 
   const scene = document.querySelector('#scene');
 
-  // iOS gyro permission
+  // iOS permission
   if (
     typeof DeviceOrientationEvent !== "undefined" &&
     typeof DeviceOrientationEvent.requestPermission === "function"
@@ -83,80 +83,56 @@ async function enterVR() {
     try {
       const permission = await DeviceOrientationEvent.requestPermission();
 
-      if (permission !== "granted") {
-        return;
-      }
+      if (permission !== "granted") return;
+
     } catch (e) {
       console.log(e);
     }
   }
 
   scene.enterVR();
-}
 
-// 🔥 ANDROID VR TOUCH FIX
-window.addEventListener(
-  "touchstart",
-  function () {
-    walking = true;
-  },
-  true
-);
+  // 🔥 IMPORTANT ANDROID FIX
+  setTimeout(() => {
 
-window.addEventListener(
-  "touchend",
-  function () {
-    walking = false;
-  },
-  true
-);
+    const canvas = scene.canvas;
 
-// 🔥 FORCE WALK IN VR MODE
-function moveForward() {
-
-  if (!walking) return;
-
-  const pos = rig.object3D.position;
-
-  const cam = document.querySelector("#camera");
-
-  const dir = new THREE.Vector3();
-
-  cam.object3D.getWorldDirection(dir);
-
-  pos.x -= dir.x * 0.08;
-  pos.z -= dir.z * 0.08;
-}
-
-// 🔥 LOOP
-function animate() {
-
-  moveForward();
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-// 🔥 FIX CANVAS TOUCH IN ANDROID VR
-document.querySelector('a-scene').addEventListener('renderstart', () => {
-
-  const canvas = document.querySelector('canvas');
-
-  if (canvas) {
-
-    canvas.style.pointerEvents = "auto";
-    canvas.style.touchAction = "none";
-
-    canvas.addEventListener("touchstart", () => {
+    // TOUCH HOLD = WALK
+    canvas.addEventListener('pointerdown', () => {
       walking = true;
-    }, true);
+    });
 
-    canvas.addEventListener("touchend", () => {
+    // RELEASE = STOP
+    canvas.addEventListener('pointerup', () => {
       walking = false;
-    }, true);
+    });
+
+    canvas.addEventListener('pointercancel', () => {
+      walking = false;
+    });
+
+  }, 1000);
+}
+
+// 🔥 MOVE LOOP
+function tick() {
+
+  if (walking) {
+
+    const camera = document.querySelector('#camera');
+
+    const dir = new THREE.Vector3();
+
+    camera.object3D.getWorldDirection(dir);
+
+    rig.object3D.position.x -= dir.x * 0.08;
+    rig.object3D.position.z -= dir.z * 0.08;
   }
-});
+
+  requestAnimationFrame(tick);
+}
+
+tick();
 </script>
 
 </body>
