@@ -25,20 +25,16 @@
 
 <body>
 
-<div id="overlay"></div>
-
 <div id="ui">
   <button onclick="enterVR()">ENTER VR</button>
 </div>
 
 <a-scene
 
+
   id="scene"
-
-  webxr="optionalFeatures: local-floor, bounded-floor; overlayElement: #overlay;"
-
+  webxr="optionalFeatures: local-floor, bounded-floor;"
   vr-mode-ui="enabled: true"
-
   device-orientation-permission-ui="enabled: true"
 >
 
@@ -69,97 +65,41 @@
 let rig = document.querySelector('#rig');
 let walking = false;
 
-// ENTER VR
-async function enterVR() {
-
+// masuk VR
+function enterVR() {
   const scene = document.querySelector('#scene');
-
-  // IOS permission
-  if (
-    typeof DeviceOrientationEvent !== "undefined" &&
-    typeof DeviceOrientationEvent.requestPermission === "function"
-  ) {
-
-    try {
-
-      const permission =
-        await DeviceOrientationEvent.requestPermission();
-
-      if (permission !== "granted") return;
-
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
-  await scene.enterVR();
+  scene.enterVR();
 }
 
-// 🔥 ANDROID VR TOUCH POLLING
-setInterval(() => {
+// TOUCH CONTROL = JALAN MAJU
+document.addEventListener('touchstart', () => {
+  walking = true;
+});
 
-  // cek sentuhan aktif di layar
-  if (navigator.maxTouchPoints > 0) {
+document.addEventListener('touchend', () => {
+  walking = false;
+});
 
-    if (document.visibilityState === "visible") {
-
-      // paksa detect finger
-      if (window.__touching === true) {
-        walking = true;
-      } else {
-        walking = false;
-      }
-    }
-  }
-
-}, 16);
-
-// 🔥 GLOBAL TOUCH TRACK
-window.addEventListener("touchstart", () => {
-  window.__touching = true;
-}, { passive:true });
-
-window.addEventListener("touchend", () => {
-  window.__touching = false;
-}, { passive:true });
-
-// MOVE LOOP
-function animate() {
-
+// gerakan maju
+function tick() {
   if (walking) {
+    let pos = rig.getAttribute('position');
+    let camera = document.querySelector('#camera');
 
-    const camera =
-      document.querySelector("#camera");
+    let dir = new THREE.Vector3();
+    camera.object3D.getWorldDirection(dir);
 
-    const direction =
-      new THREE.Vector3();
+    pos.x -= dir.x * 0.03;
+    pos.z -= dir.z * 0.03;
 
-    camera.object3D.getWorldDirection(direction);
-
-    rig.object3D.position.x -= direction.x * 0.08;
-    rig.object3D.position.z -= direction.z * 0.08;
+    rig.setAttribute('position', pos);
   }
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(tick);
 }
 
-animate();
+tick();
 </script>
 
-<!-- 🔥 VR MOVE BUTTON -->
-<div id="moveZone"></div>
-
-<style>
-#moveZone{
-  position:fixed;
-  left:0;
-  bottom:0;
-  width:50%;
-  height:100%;
-  z-index:9999;
-  background:transparent;
-}
-</style>
-  
 </body>
 </html>
